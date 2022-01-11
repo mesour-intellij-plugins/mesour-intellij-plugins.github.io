@@ -1,5 +1,6 @@
 html {
 	scroll-behavior: smooth;
+	background-color: #FD923A;
 }
 
 body {
@@ -7,6 +8,7 @@ body {
 	letter-spacing: 0.2px;
 	color: #333;
 	margin: 0;
+	background-color: #FD923A;
 }
 
 h1 {
@@ -311,10 +313,8 @@ pre code {
 	margin-bottom: -2px;
 }
 
-/* Break Points */
-
 @media (prefers-color-scheme: dark) {
-	body, .clear, h1, h2, h3, h4, .brand, .navbar a, .sidepanel a.section, .sidepanel a.title, .sidepanel {
+	.clear, h1, h2, h3, h4, .brand, .navbar a, .sidepanel a.section, .sidepanel a.title, .sidepanel {
 		background-color: #2b303b;
 		color: #c0c5ce;
 	}
