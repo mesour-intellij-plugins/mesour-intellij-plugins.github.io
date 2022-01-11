@@ -28,7 +28,7 @@
 	<meta name="description" content="A simple HTML/CSS DocumentationTemplate">
 	<meta name="author" content="Carlos Yllobre">
 
-	<link rel="stylesheet" href="style.css?">
+	<link rel="stylesheet" href="style.css?4">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:ital,wght@0,400;0,700;1,600|Quicksand" rel="stylesheet">
 
 	<script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
@@ -56,11 +56,15 @@
 
 			<a class="section" href="#installing">Installing the plugin</a>
 
+			<a class="section" href="#recommendations">Recommendations</a>
+
 			<div class="divider left"></div>
 
 			<a class="title" href="#features">Features</a>
 
 			<!--<a class="section" href="#basicfeatures">Feature 1</a>-->
+
+			<a class="section" href="#limitations">Known limitations</a>
 
 			<div class="divider left"></div>
 
@@ -83,13 +87,16 @@
 
 			<p>NEON (Nette Object Notation; <a href="https://doc.nette.org/en/neon/format">Neon format</a>) is a custom configuration language similar to YAML.</p>
 
-			<h3 id="installing">Installing the Plugin</h3>
+			<div class="doublespace" id="installing"></div>
+
+			<h3>Installing the Plugin</h3>
 
 			<p>
-				Bug reports can be realized in <a href="https://github.com/mesour-intellij-plugins/neon-nette-issues/issues/new/choose">GitHub public repository</a>.
+				Installation of IntelliJ NEON Nette Support is done through IntelliJ IDEA's integrated plugin manager. From within the application,
+				open Preferences and select Plugins from the list on the left-hand side. This will show you the list of currently installed plugins.
 			</p>
 
-			TODO IMAGE
+			<img src="img/install1.png" alt="feature-completion" class="image">
 
 			<p>
 				Next, click the Marketplace tab, which allows you to browse through the plugins available on JetBrains' Marketplace. Enter "NEON" into
@@ -97,11 +104,41 @@
 				the application. The plugin should now be installed, and you can set up your project.
 			</p>
 
-			TODO IMAGE
+			<div class="divider" style="width:24%; margin:30px 0;"></div>
+
+			<div class="doublespace" id="recommendations"></div>
+
+			<h3>Recommendations</h3>
+
+			<h4>If you are using integer keys, use:</h4>
+
+			<pre><code>20: test</code></pre>
+
+			Instead of:
+
+			<pre><code>"20": test</code></pre>
+
+			<h4>If you are using key after bullets definition and need more dimension arrays, use:</h4>
+
+			<pre><code>services:
+	- factory: Foo\Bar
+	  setup:
+	  	key: [foo: 123, bar: 456]</code></pre>
+
+			Instead of:
+
+			<pre><code>services:
+	- factory: Foo\Bar
+	  setup:
+		key:
+			foo: 123
+			bar: 456</code></pre>
 
 			<div class="divider" style="width:24%; margin:30px 0;"></div>
 
-			<h2 id="features">Features</h2>
+			<div class="doublespace" id="features"></div>
+
+			<h2>Features</h2>
 
 			<ul>
 				<li>Coding assistance (highlighting, completion, formatting, refactorings, etc.)</li>
@@ -111,11 +148,33 @@
 				<li>Structure view, typing helpers, etc.</li>
 			</ul>
 
+			<img src="img/feature-completion.png" alt="feature-completion" class="image">
+			<img src="img/feature-find-usages.png" alt="feature-find-usages" class="image">
+
 			<!--<h3>Feature 1</h3>
 
 			<p id="advancedfeatures">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 				Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 			</p>-->
+
+			<div class="divider" style="width:24%; margin:30px 0;"></div>
+
+			<div class="doublespace" id="limitations"></div>
+
+			<h3>Known limitations</h3>
+
+			<h4>Services and parameters names if refactoring</h4>
+
+			<ul>
+				<li>Here problem with refactoring services and parameters that have **more than one definition** (only usages will be refactored)</li>
+				<li>For services and parameters with only one definition everything works fine</li>
+			</ul>
+
+			<h4>Move class</h4>
+
+			<ul>
+				<li>For now is not implemented `Move class` functionality. If you use it in PHP, then it will not affect Neon files.</li>
+			</ul>
 
 			<div class="divider" style="width:24%; margin:30px 0;"></div>
 
@@ -127,13 +186,15 @@
 
 			<h2 id="bugreports">Bug Reports</h2>
 
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.marks are protected by intellectual property rights.</p>
-
-			<div class="doublespace"></div>
+			<p>
+				Bug reports can be realized in <a href="https://github.com/mesour-intellij-plugins/neon-nette-issues/issues/new/choose">GitHub public repository</a>.
+			</p>
 
 			<div class="divider" style="width:24%; margin:30px 0;"></div>
 
 			<p>© 2022 Matouš Němec</p>
+
+			<div class="doublespace"></div>
 
 		</div>
 

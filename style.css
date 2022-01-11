@@ -151,6 +151,23 @@ a:hover {
 	text-decoration: underline;
 }
 
+.image {
+	max-width: 100%;
+}
+
+.doublespace {
+	margin-bottom: 90px;
+	display: block;
+}
+
+pre code {
+	background-color: #2b303b;
+	color: #c0c5ce;
+	border: 1px solid #999;
+	display: block;
+	padding: 20px;
+}
+
 .eula-col {
 	width: 100%;
 	margin: auto;
@@ -288,6 +305,12 @@ a:hover {
 
 /* Break Points */
 
+@media (prefers-color-scheme: dark) {
+	body, .clear, h1, h2, h3, h4, .brand, .navbar a, .sidepanel a.section, .sidepanel a.title, .sidepanel {
+		background-color: #2b303b;
+		color: #c0c5ce;
+	}
+}
 
 /* Extra small-small devices (phones, 420px and down) */
 @media only screen and (max-width: 420px) {
@@ -329,7 +352,7 @@ a:hover {
 	}
 
 	.main-col {
-		width: 100%;
+		width: 70%;
 	}
 
 
