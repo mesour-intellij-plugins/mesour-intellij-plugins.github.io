@@ -103,18 +103,18 @@
 			<h3>Migration guide from free plugin</h3>
 
 			<ul>
-				<li><b>Do not forget to uninstalling old free plugin</b></li>
+				<li><b>Do not forget to uninstall old free plugin before installing the Pro version</b></li>
 				<li>XML file was renamed from<code class="inline">latte-intellij.xml</code> to <code class="inline">intellij-latte-pro.xml</code></li>
 				<li>
 					In XML:
 					<ul>
-						<li><code class="inline">allowedFilters</code> in tags was renamed to <code class="inline">allowFilters</code></li>
-						<li>In filters configuration was removed <code class="inline">insertColons</code> and it is replaced with <code class="inline">&lt;filterArguments&gt;</code></li>
+						<li>Attribute <code class="inline">allowedFilters</code> in &lt;tags&gt; was renamed to <code class="inline">allowFilters</code></li>
+						<li>Attribute <code class="inline">insertColons</code> in &lt;filters&gt; was removed and replaced by <code class="inline">&lt;filterArguments&gt;</code> element</li>
 					</ul>
 				</li>
-				<li>Filters, variables and function can be no longer configured in IDE preferences. It can be configured only via XML</li>
-				<li>Tags configured in XML now require configure type in IDE preferences. It can be done via quick fix in XML or via balloon notification if you open project.</li>
-				<li><code class="inline">{latte ...}</code> tag can not be used as unpaired without <code class="inline">/}</code> at the end. Use <code class="inline">{latte ... /}</code> if you want unpaired.</li>
+				<li>Filters, variables and functions cannot be longer configured in IDE preferences. The only way to configure them is via XML</li>
+				<li>Tags configured in XML now require their type (PAIR, UNPAIRED etc.) to be configured in IDE preferences. That can be done via quick fix in XML or via balloon notification when you open project.</li>
+				<li><code class="inline">{latte ...}</code> tag cannot be used as unpaired without <code class="inline">/}</code> at the end. Use <code class="inline">{latte ... /}</code> if you want it unpaired.</li>
 				<li>Translation tag <code class="inline">{_...}</code> can be used only as unpaired</li>
 			</ul>
 
@@ -124,14 +124,14 @@
 
 			<p>
 				Installation of IntelliJ Latte Pro is done through IntelliJ IDEA's integrated plugin manager. From within the application,
-				open Preferences and select Plugins from the list on the left-hand side. This will show you the list of currently installed plugins.
-				<b>If you are currently using Latte free plugin then you must uninstall it</b> before install Latte Pro.
+				open <i>Preferences</i> and select <i>Plugins</i> from the list on the left-hand side. This will show you the list of currently installed plugins.
+				<b>If you are currently using Latte free plugin then you must uninstall it</b> before installing Latte Pro.
 			</p>
 
 			<img src="img/install-latte1.png" alt="feature-completion" class="image">
 
 			<p>
-				Next, click the Marketplace tab, which allows you to browse through the plugins available on JetBrains' Marketplace. Enter "Latte" into
+				Next, click the <i>Marketplace</i> tab above the list. That allows you to browse through the plugins available on JetBrains' Marketplace. Enter "Latte" into
 				the search field in the top left corner and select Latte Pro from the list. Finally, click the green Install button and restart
 				the application. The plugin should now be installed, and you can set up your project.
 			</p>
@@ -145,7 +145,7 @@
 			<h2>Features</h2>
 
 			<ul>
-				<li>Everything what have open-source plugin but really faster</li>
+				<li>Everything from the open-source plugin but much faster</li>
 				<li>No problems with big projects</li>
 				<li>Code completion for PHP, classic HTML, attribute tags and more</li>
 				<li>Registering custom tags, filters and custom functions</li>
@@ -154,18 +154,18 @@
 				<li>Support for types defined with &lt;&gt;, eg: array&lt;int, string&gt;</li>
 			</ul>
 
-			<p>TODO: add some images for features</p>
+			<p>TODO: add some images of features</p>
 
 			<div class="doublespace" id="xml-config"></div>
 
 			<h3>XML configuration</h3>
 
-			<p>XML configuration files for Latte plugin are files contains information about tags, filters, variables etc.</p>
+			<p>XML configuration files for Latte plugin are files that contain information about tags, filters, variables etc.</p>
 
 			<ul>
-				<li>Plugin load all files named <code class="inline">intellij-latte-pro.xml</code> in your project including <code class="inline">vendor</code> folder or something other folders except ignored folders.</li>
-				<li>You can use more <code class="inline">intellij-latte-pro.xml</code> files. All will be loaded, but must have another value in vendor attribute.</li>
-				<li><b>Tip:</b> distribute <code class="inline">intellij-latte-pro.xml</code> with your Composer package</li>
+				<li>Plugin loads all files named <code class="inline">intellij-latte-pro.xml</code> in your project including <code class="inline">vendor</code> folder or some other folders except ignored folders.</li>
+				<li>You can use more <code class="inline">intellij-latte-pro.xml</code> files. All will be loaded, but must have different value in <code class="inline">vendor</code> attribute.</li>
+				<li><b>Tip:</b> distribute <code class="inline">intellij-latte-pro.xml</code> files with your Composer package</li>
 			</ul>
 
 			<p>This is example file content with sample values:</p>
@@ -237,14 +237,14 @@
 					<td>yes</td>
 					<td>none</td>
 					<td>any string</td>
-					<td>Name for tag</td>
+					<td>Name of tag</td>
 				</tr>
 				<tr>
 					<td><code class="inline">type</code></td>
 					<td>yes</td>
 					<td>none</td>
 					<td><code class="inline">PAIR</code>, <code class="inline">UNPAIRED</code>, <code class="inline">UNPAIRED_ATTR</code> or <code class="inline">ATTR_ONLY</code></td>
-					<td>Type for tag</td>
+					<td>Type of tag</td>
 				</tr>
 				<tr>
 					<td><code class="inline">arguments</code></td>
@@ -279,42 +279,42 @@
 					<td>no</td>
 					<td>""</td>
 					<td>any string</td>
-					<td>Description will be show in completion dialog</td>
+					<td>Description will be shown in completion dialog</td>
 				</tr>
 				<tr>
 					<td><code class="inline">documentation</code></td>
 					<td>no</td>
 					<td>""</td>
 					<td>any string</td>
-					<td>Documentation will be show if you hover over tag element</td>
+					<td>Documentation will be shown when you hover over tag element</td>
 				</tr>
 				<tr>
 					<td><code class="inline">documentationUrl</code></td>
 					<td>no</td>
 					<td>""</td>
 					<td>URL</td>
-					<td>Documentation URL will be show if you hover over tag element</td>
+					<td>Documentation URL will be shown when you hover over tag element</td>
 				</tr>
 				</tbody>
 			</table>
 
-			<h4>Attribute <code class="inline">type</code> detail:</h4>
+			<h4>Attribute <code class="inline">type</code> details:</h4>
 
 			<ul>
-				<li><code class="inline">PAIR</code> - it means pair tag like <code class="inline">{form}{/form}</code></li>
-				<li><code class="inline">UNPAIRED</code> - it means unpaired tag like <code class="inline">{varType}</code></li>
-				<li><code class="inline">UNPAIRED_ATTR</code> - it means tag used only as unpaired tag like <code class="inline">{varType}</code> or n:attribute, like <code>n:else</code></li>
-				<li><code class="inline">ATTR_ONLY</code> - it means tag used only as n:attribute, like <code class="inline">n:class</code></li>
+				<li><code class="inline">PAIR</code> - means pair tag like <code class="inline">{form}{/form}</code></li>
+				<li><code class="inline">UNPAIRED</code> - means unpaired tag like <code class="inline">{varType}</code></li>
+				<li><code class="inline">UNPAIRED_ATTR</code> - means tag used only as unpaired tag like <code class="inline">{varType}</code> or n:attribute, like <code>n:else</code></li>
+				<li><code class="inline">ATTR_ONLY</code> - means tag used only as n:attribute, like <code class="inline">n:class</code></li>
 			</ul>
 
-			<h4>Attribute <code class="inline">arguments</code> detail:</h4>
+			<h4>Attribute <code class="inline">arguments</code> details:</h4>
 
 			<ul>
-				<li>Attribute <code class="inline">arguments</code> can contains string which will be shown as help after code completion</li>
+				<li>Attribute <code class="inline">arguments</code> can contain string which will be shown as help after code completion</li>
 				<li>If attribute <code class="inline">arguments</code> is not provided, it means "tag without arguments"</li>
-				<li>Instead of attribute <code class="inline">argumnets</code> you can define arguments as tag which is child of <code class="inline">&lt;arguments&gt;</code> in <code class="inline">&lt;tag&gt;</code></li>
-				<li>If you use argument settings via: <code class="inline">&lt;argument&gt;</code> tags, help for code completion will be generated automatically</li>
-				<li>But you can still use argument <code class="inline">arguments</code> if using <code class="inline">&lt;argument&gt;</code> tags, then this value will rewrite automatically generated help after code completion</li>
+				<li>Instead of using attribute <code class="inline">arguments</code> you can define arguments as child <code class="inline">&lt;argument&gt;</code> elements of <code class="inline">&lt;arguments&gt;</code> element which is child of <code class="inline">&lt;tag&gt;</code></li>
+				<li>When you use argument settings via <code class="inline">&lt;argument&gt;</code> tags, help for code completion will be generated automatically</li>
+				<li>But you can still use argument <code class="inline">arguments</code>. When using <code class="inline">&lt;argument&gt;</code> tags, then this value will rewrite automatically generated help after code completion</li>
 			</ul>
 
 			<h4>&lt;argument&gt; in &lt;arguments&gt; in &lt;tag&gt;</h4>
@@ -335,21 +335,21 @@
 					<td>yes</td>
 					<td>none</td>
 					<td>any string</td>
-					<td>Name for tag argument</td>
+					<td>Name of tag argument</td>
 				</tr>
 				<tr>
 					<td><code class="inline">types</code></td>
 					<td>yes</td>
 					<td>none</td>
 					<td><em>Types are listed under this table</em></td>
-					<td>Argument  types separated by comma</td>
+					<td>Argument types separated by comma</td>
 				</tr>
 				<tr>
 					<td><code class="inline">validType</code></td>
 					<td>no</td>
 					<td>mixed</td>
 					<td>PHP type definition</td>
-					<td>Expected return type for argument</td>
+					<td>Expected return type of argument</td>
 				</tr>
 				<tr>
 					<td><code class="inline">required</code></td>
@@ -371,23 +371,23 @@
 			<h4>Attribute <code class="inline">types</code> detail:</h4>
 
 			<ul>
-				<li><code class="inline">PHP_IDENTIFIER</code> - match with <code class="inline">foo</code>, <code class="inline">bar</code>, <code class="inline">foo_123</code>, ...</li>
-				<li><code class="inline">PHP_EXPRESSION</code> - match with <code class="inline">$var</code>, <code class="inline">foo()</code>, <code class="inline">\Bar::</code>, <code class="inline">... (-&gt; | :: property|method|constant)</code></li>
-				<li><code class="inline">PHP_CONDITION</code> - match with <code class="inline">PHP_EXPRESSION</code> (only use <code class="inline">condition</code> as name for completion)</li>
-				<li><code class="inline">PHP_CLASS_NAME</code> - match with class names <code class="inline">\Foo</code>, <code class="inline">\Foo\Bar</code>, ...</li>
-				<li><code class="inline">VARIABLE</code> - match with <code class="inline">$var</code></li>
-				<li><code class="inline">VARIABLE_DEFINITION</code> - match with <code class="inline">$var</code> and mark it as definition</li>
-				<li><code class="inline">VARIABLE_DEFINITION_EXPRESSION</code> - match with <code class="inline">[type] $variable = expr</code>, and mark variable as definition</li>
-				<li><code class="inline">VARIABLE_DEFINITION_ITEM</code> - match with <code class="inline">[type] $var</code> and mark variable as definition</li>
-				<li><code class="inline">BLOCK</code> - match with <code class="inline">#block</code></li>
-				<li><code class="inline">BLOCK_USAGE</code> - match with <code class="inline">PHP_IDENTIFIER</code> (only use <code class="inline">block</code> as name for completion)</li>
-				<li><code class="inline">NONE</code> - match with string <code class="inline">none</code></li>
-				<li><code class="inline">PHP_TYPE</code> - match with php type like <code class="inline">string</code>, <code class="inline">string|null</code>, <code class="inline">\Foo\Bar</code>, ...</li>
-				<li><code class="inline">CONTENT_TYPE</code> - match with content type like <code class="inline">application/json</code>, ...</li>
-				<li><code class="inline">LINK_DESTINATION</code> - match with <code class="inline">default</code>, <code class="inline">Foo:detail</code>, <code class="inline">handleFoo!</code>, ...</li>
-				<li><code class="inline">LINK_PARAMETERS</code> - match with <code class="inline">PHP_EXPRESSION</code> or <code class="inline">KEY_VALUE</code></li>
-				<li><code class="inline">KEY_VALUE</code> - match with <code class="inline">, [var =&gt;] value</code></li>
-				<li><code class="inline">CONTROL</code> - match with <code class="inline">VARIABLE</code> (only use <code class="inline">$control</code> as name for completion)</li>
+				<li><code class="inline">PHP_IDENTIFIER</code> - matches with <code class="inline">foo</code>, <code class="inline">bar</code>, <code class="inline">foo_123</code>, ...</li>
+				<li><code class="inline">PHP_EXPRESSION</code> - matches with <code class="inline">$var</code>, <code class="inline">foo()</code>, <code class="inline">\Bar::</code>, <code class="inline">... (-&gt; | :: property|method|constant)</code></li>
+				<li><code class="inline">PHP_CONDITION</code> - matches with <code class="inline">PHP_EXPRESSION</code> (only use <code class="inline">condition</code> as name for completion)</li>
+				<li><code class="inline">PHP_CLASS_NAME</code> - matches with class names <code class="inline">\Foo</code>, <code class="inline">\Foo\Bar</code>, ...</li>
+				<li><code class="inline">VARIABLE</code> - matches with <code class="inline">$var</code></li>
+				<li><code class="inline">VARIABLE_DEFINITION</code> - matches with <code class="inline">$var</code> and mark it as definition</li>
+				<li><code class="inline">VARIABLE_DEFINITION_EXPRESSION</code> - matches with <code class="inline">[type] $variable = expr</code>, and mark variable as definition</li>
+				<li><code class="inline">VARIABLE_DEFINITION_ITEM</code> - matches with <code class="inline">[type] $var</code> and mark variable as definition</li>
+				<li><code class="inline">BLOCK</code> - matches with <code class="inline">#block</code></li>
+				<li><code class="inline">BLOCK_USAGE</code> - matches with <code class="inline">PHP_IDENTIFIER</code> (only use <code class="inline">block</code> as name for completion)</li>
+				<li><code class="inline">NONE</code> - matches with string <code class="inline">none</code></li>
+				<li><code class="inline">PHP_TYPE</code> - matches with php type like <code class="inline">string</code>, <code class="inline">string|null</code>, <code class="inline">\Foo\Bar</code>, ...</li>
+				<li><code class="inline">CONTENT_TYPE</code> - matches with content type like <code class="inline">application/json</code>, ...</li>
+				<li><code class="inline">LINK_DESTINATION</code> - matches with <code class="inline">default</code>, <code class="inline">Foo:detail</code>, <code class="inline">handleFoo!</code>, ...</li>
+				<li><code class="inline">LINK_PARAMETERS</code> - matches with <code class="inline">PHP_EXPRESSION</code> or <code class="inline">KEY_VALUE</code></li>
+				<li><code class="inline">KEY_VALUE</code> - matches with <code class="inline">, [var =&gt;] value</code></li>
+				<li><code class="inline">CONTROL</code> - matches with <code class="inline">VARIABLE</code> (only use <code class="inline">$control</code> as name for completion)</li>
 			</ul>
 
 			<h4>&lt;filter&gt; in &lt;filters&gt;</h4>
@@ -408,7 +408,7 @@
 					<td>yes</td>
 					<td>none</td>
 					<td>any string</td>
-					<td>Name for filter</td>
+					<td>Name of filter</td>
 				</tr>
 				<tr>
 					<td><code class="inline">description</code></td>
@@ -422,14 +422,14 @@
 					<td>no</td>
 					<td>""</td>
 					<td>any string</td>
-					<td>Documentation will be show if you hover over filter element</td>
+					<td>Documentation will be shown when you hover over filter element</td>
 				</tr>
 				<tr>
 					<td><code class="inline">documentationUrl</code></td>
 					<td>no</td>
 					<td>""</td>
 					<td>URL</td>
-					<td>Documentation URL will be show if you hover over filter element</td>
+					<td>Documentation URL will be shown when you hover over filter element</td>
 				</tr>
 				</tbody>
 			</table>
@@ -452,21 +452,21 @@
 					<td>yes</td>
 					<td>none</td>
 					<td>any string</td>
-					<td>Name for filter attribute</td>
+					<td>Name of filter argument</td>
 				</tr>
 				<tr>
 					<td><code class="inline">type</code></td>
 					<td>yes</td>
 					<td>none</td>
 					<td>PHP type definition</td>
-					<td>Name for filter attribute</td>
+					<td>Type of filter argument</td>
 				</tr>
 				<tr>
 					<td><code class="inline">defaultValue</code></td>
 					<td>no</td>
 					<td>""</td>
 					<td>any string</td>
-					<td>Default value for argument. No default value means required argument.</td>
+					<td>Default value of argument. No default value means required argument.</td>
 				</tr>
 				<tr>
 					<td><code class="inline">description</code></td>
@@ -496,7 +496,7 @@
 					<td>yes</td>
 					<td>none</td>
 					<td>any string</td>
-					<td>Name for PHP variable (without <code>$</code>)</td>
+					<td>Name of PHP variable (without <code>$</code>)</td>
 				</tr>
 				<tr>
 					<td><code class="inline">type</code></td>
@@ -526,7 +526,7 @@
 					<td>yes</td>
 					<td>none</td>
 					<td>any string</td>
-					<td>Name for custom function</td>
+					<td>Name of custom function</td>
 				</tr>
 				<tr>
 					<td><code class="inline">returnType</code></td>
@@ -540,14 +540,14 @@
 					<td>no</td>
 					<td>""</td>
 					<td>any string</td>
-					<td>Documentation will be show if you hover over function element</td>
+					<td>Documentation will be shown when you hover over function element</td>
 				</tr>
 				<tr>
 					<td><code class="inline">documentationUrl</code></td>
 					<td>no</td>
 					<td>""</td>
 					<td>URL</td>
-					<td>Documentation URL will be show if you hover over function element</td>
+					<td>Documentation URL will be shown when you hover over function element</td>
 				</tr>
 				</tbody>
 			</table>
@@ -570,21 +570,21 @@
 					<td>yes</td>
 					<td>none</td>
 					<td>any string</td>
-					<td>Name for function attribute</td>
+					<td>Name of function argument</td>
 				</tr>
 				<tr>
 					<td><code class="inline">type</code></td>
 					<td>yes</td>
 					<td>none</td>
 					<td>PHP type definition</td>
-					<td>Name for filter attribute</td>
+					<td>Type of function argument</td>
 				</tr>
 				<tr>
 					<td><code class="inline">defaultValue</code></td>
 					<td>no</td>
 					<td>""</td>
 					<td>any string</td>
-					<td>Default value for argument. No default value means required argument.</td>
+					<td>Default value of argument. No default value means required argument.</td>
 				</tr>
 				<tr>
 					<td><code class="inline">description</code></td>
@@ -610,7 +610,7 @@
 			<h2 id="bugreports">Bug Reports</h2>
 
 			<p>
-				Bug reports can be realized in <a href="https://github.com/mesour-intellij-plugins/latte-pro-issues/issues">GitHub public repository</a>.
+				Bug reports can be posted in <a href="https://github.com/mesour-intellij-plugins/latte-pro-issues/issues">GitHub public repository</a>.
 			</p>
 
 			<div class="divider" style="width:24%; margin:30px 0;"></div>
