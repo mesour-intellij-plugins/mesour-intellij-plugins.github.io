@@ -62,6 +62,8 @@
 
 			<a class="section" href="#installing">Installing the plugin</a>
 
+			<a class="section" href="#recommendations"><i class="fa fa-exclamation-triangle text-danger"></i> Recommendations</a>
+
 			<div class="divider left"></div>
 
 			<a class="title" href="#features">Features</a>
@@ -87,15 +89,20 @@
 
 			<h2 id="gettingstarted">Getting Started</h2>
 
-			<p>Provides support for <a href="https://latte.nette.org" target="_blank">Latte</a>, the best template engine for PHP.</p>
+			<p>Provides support for <a href="https://latte.nette.org" target="_blank">Latte</a>, the first truly secure and intuitive template engine for PHP.</p>
+
+			<p>
+				<i class="fa fa-exclamation-triangle text-danger"></i> As first read the <a href="#recommendations">recommendations</a>.
+				If you do not follow it then the plugin may not work properly on older versions of Latte.
+			</p>
 
 			<div class="doublespace" id="links"></div>
 
 			<h3>Useful links</h3>
 
 			<ul>
-				<li>JetBrains <a href="https://plugins.jetbrains.com/plugin/19661-latte-pro">plugin page</a></li>
-				<li><b>Bug reports</b> can be realized in <a href="https://github.com/mesour-intellij-plugins/latte-pro-issues/issues">GitHub issues</a></li>
+				<li>JetBrains <a href="https://plugins.jetbrains.com/plugin/19661-latte-pro" target="_blank">plugin page</a></li>
+				<li><b>Bug reports</b> can be realized in <a href="https://github.com/mesour-intellij-plugins/latte-pro-issues/issues" target="_blank">GitHub issues</a></li>
 			</ul>
 
 			<div class="doublespace" id="migration"></div>
@@ -137,6 +144,31 @@
 			</p>
 
 			<img src="img/install-latte2.png" alt="feature-completion" class="image">
+
+			<div class="divider" style="width:24%; margin:30px 0;"></div>
+
+			<div class="doublespace" id="recommendations"></div>
+
+			<h3><i class="fa fa-exclamation-triangle text-danger"></i> Recommendations <small>(for older Latte versions)</small></h3>
+
+			<p>
+				If you do not follow it then the plugin may not work properly on older versions of Latte.
+				Because in newer versions these constructs are marked as deprecated or completely removed.
+			</p>
+
+			<h4>Do not use deprecated construction <code class="inline">{label name}</code> without <code class="inline">/</code> at the end</h4>
+
+			<ul>
+				<li><span class="text-danger">WRONG</span>: <code class="inline line-through">{label name}</code></li>
+				<li><span class="text-success">CORRECT</span>: <code class="inline">{label name /}</code> or paired <code class="inline">{label name} ... {/label}</code></li>
+			</ul>
+
+			<h4>Do not use deprecated construction <code class="inline">{_}...{/_}</code></h4>
+
+			<ul>
+				<li><span class="text-danger">WRONG</span>: <code class="inline line-through">{_}translate.key{/_}</code></li>
+				<li><span class="text-success">CORRECT</span>: <code class="inline">{_translate.key}</code> or paired <code class="inline">{translate}translate.key{/translate}</code></li>
+			</ul>
 
 			<div class="divider" style="width:24%; margin:30px 0;"></div>
 

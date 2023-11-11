@@ -175,6 +175,23 @@ code.inline {
 	display: inline-block;
 }
 
+.line-through {
+	text-decoration: line-through;
+}
+
+.text-danger {
+	color: #dc3545 !important;
+}
+
+.text-success {
+	color: #28a745 !important;
+}
+
+.text-warning {
+	color: #fd923a !important;
+}
+
+
 pre code {
 	background-color: #2b303b;
 	color: #c0c5ce;
