@@ -165,6 +165,13 @@
 
 			<h4>Do not use deprecated construction <code class="inline">{_}...{/_}</code></h4>
 
+			<p>
+				<i>
+					You must implement custom tag {translate} to older versions of Latte, if you want use it with plugin.
+					But you will be prepared for upgrade to newer Latte versions.
+			    </i>
+			</p>
+
 			<ul>
 				<li><span class="text-danger">WRONG</span>: <code class="inline line-through">{_}translate.key{/_}</code></li>
 				<li><span class="text-success">CORRECT</span>: <code class="inline">{_translate.key}</code> or paired <code class="inline">{translate}translate.key{/translate}</code></li>
