@@ -1,0 +1,253 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="neon">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="project" type="projectType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="extensions" type="extensionsType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="reusables" type="reusablesType" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="vendor" type="xs:string" use="required"/>
+            <xs:attribute name="version" type="xs:string" use="required"/>
+        </xs:complexType>
+        <xs:unique name="uniqueUseExtensionName">
+            <xs:selector xpath="project/useExtension"/>
+            <xs:field xpath="@name"/>
+        </xs:unique>
+        <xs:unique name="uniqueExtensionType">
+            <xs:selector xpath="extensions/extension"/>
+            <xs:field xpath="@type"/>
+        </xs:unique>
+    </xs:element>
+
+    <xs:complexType name="projectType">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="useExtension" type="useExtensionType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="file" type="fileType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="parameters" type="parametersType" minOccurs="0" maxOccurs="1"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- UseExtension type -->
+    <xs:complexType name="useExtensionType">
+        <xs:attribute name="name" type="xs:NCName" use="required"/>
+        <xs:attribute name="type" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <!-- UseExtension type -->
+    <xs:complexType name="fileType">
+        <xs:attribute name="type" type="fileTypeEnum" use="required"/>
+        <xs:attribute name="path" type="xs:NCName" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="parametersType">
+        <xs:sequence>
+            <xs:element name="parameter" type="parameterType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="parameterType">
+        <xs:attribute name="name" type="xs:NCName" use="required"/>
+        <xs:attribute name="type" type="xs:string" use="required"/>
+        <xs:attributeGroup ref="documentation"/>
+    </xs:complexType>
+
+    <xs:complexType name="extensionsType">
+        <xs:sequence>
+            <xs:element name="extension" type="extensionType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="extensionType">
+        <xs:sequence>
+            <xs:element name="schema" type="schemaType" minOccurs="0"/>
+            <xs:element name="services" type="servicesType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="reusablesType">
+        <xs:sequence>
+            <xs:element name="reusable" type="reusableType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="schemaType">
+        <xs:group ref="allTypes" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:complexType>
+
+    <xs:complexType name="reusableType">
+        <xs:choice>
+            <xs:element name="anyOf" type="schemaType" maxOccurs="unbounded"/>
+            <xs:element ref="structure" maxOccurs="unbounded"/>
+            <xs:element ref="arrayOf" maxOccurs="unbounded"/>
+            <xs:element ref="listOf" maxOccurs="unbounded"/>
+            <xs:element ref="type" maxOccurs="unbounded"/>
+            <xs:element ref="int"/>
+            <xs:element ref="float"/>
+            <xs:element ref="string"/>
+            <xs:element ref="null"/>
+            <xs:element ref="bool"/>
+            <xs:element ref="callable"/>
+            <xs:element ref="mixed"/>
+            <xs:element ref="email"/>
+        </xs:choice>
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="servicesType">
+        <xs:sequence>
+            <xs:element name="service" type="serviceType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="serviceType">
+        <xs:attribute name="name" type="xs:NCName" use="required"/>
+        <xs:attribute name="type" type="xs:string" use="required"/>
+        <xs:attributeGroup ref="documentation"/>
+    </xs:complexType>
+
+    <xs:group name="allTypes">
+        <xs:choice>
+            <xs:element name="anyOf" type="schemaType" maxOccurs="unbounded"/>
+            <xs:element ref="structure" maxOccurs="unbounded"/>
+            <xs:element ref="arrayOf" maxOccurs="unbounded"/>
+            <xs:element ref="listOf" maxOccurs="unbounded"/>
+            <xs:element ref="type" maxOccurs="unbounded"/>
+            <xs:element ref="useReusable"/>
+            <xs:element ref="int"/>
+            <xs:element ref="float"/>
+            <xs:element ref="string"/>
+            <xs:element ref="null"/>
+            <xs:element ref="bool"/>
+            <xs:element ref="callable"/>
+            <xs:element ref="mixed"/>
+            <xs:element ref="email"/>
+        </xs:choice>
+    </xs:group>
+
+    <xs:complexType name="intOrStringType">
+        <xs:sequence minOccurs="1" maxOccurs="2">
+            <xs:element ref="int" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="string" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="anyOfType">
+        <xs:group ref="allTypes" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:complexType>
+
+    <xs:element name="arrayOf">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="key" type="intOrStringType" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="value" type="anyOfType" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="items"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="listOf">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="value" type="anyOfType" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="items"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="useReusable">
+        <xs:complexType>
+            <xs:attribute name="ref" type="xs:IDREF" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="structure">
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element ref="field" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="field">
+        <xs:complexType>
+            <xs:group ref="allTypes" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:attribute name="name" type="xs:NCName" use="required"/>
+            <xs:attribute name="default" type="xs:string"/>
+            <xs:attributeGroup ref="documentation"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="type">
+        <xs:complexType>
+            <xs:attribute name="value" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="string">
+        <xs:complexType>
+            <xs:attribute name="minLength" type="xs:nonNegativeInteger" default="0"/>
+            <xs:attribute name="maxLength" type="maxOccursType" default="unbounded"/>
+            <xs:attribute name="pattern" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="int">
+        <xs:complexType>
+            <xs:attribute name="min" type="intRangeType" default="unbounded"/>
+            <xs:attribute name="max" type="intRangeType" default="unbounded"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="float">
+        <xs:complexType>
+            <xs:attribute name="min" type="intRangeType" default="unbounded"/>
+            <xs:attribute name="max" type="intRangeType" default="unbounded"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="callable"/>
+    <xs:element name="bool"/>
+    <xs:element name="mixed"/>
+    <xs:element name="null"/>
+    <xs:element name="email"/>
+
+    <xs:simpleType name="maxOccursType">
+        <xs:union memberTypes="xs:nonNegativeInteger">
+            <xs:simpleType>
+                <xs:restriction base="xs:NMTOKEN">
+                    <xs:enumeration value="unbounded"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+
+    <xs:simpleType name="intRangeType">
+        <xs:union memberTypes="xs:integer">
+            <xs:simpleType>
+                <xs:restriction base="xs:NMTOKEN">
+                    <xs:enumeration value="unbounded"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+
+    <xs:simpleType name="fileTypeEnum">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="none"/>
+            <xs:enumeration value="translation"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:attributeGroup name="items">
+        <xs:attribute name="minItems" type="xs:nonNegativeInteger" default="unbounded"/>
+        <xs:attribute name="maxItems" type="maxOccursType" default="unbounded"/>
+    </xs:attributeGroup>
+
+    <xs:attributeGroup name="documentation">
+        <xs:attribute name="deprecated" type="xs:string"/>
+        <xs:attribute name="documentation" type="xs:string"/>
+        <xs:attribute name="documentationUrl" type="xs:string"/>
+    </xs:attributeGroup>
+</xs:schema>
