@@ -68,7 +68,7 @@
 
 			<a class="title" href="#features">Features</a>
 
-			<!--<a class="section" href="#basicfeatures">Feature 1</a>-->
+			<a class="section" href="#xml-config">XML configuration</a>
 
 			<a class="section" href="#limitations">Known limitations</a>
 
@@ -177,11 +177,263 @@
 			<img src="img/feature-completion.png" alt="feature-completion" class="image">
 			<img src="img/feature-find-usages.png" alt="feature-find-usages" class="image">
 
-			<!--<h3>Feature 1</h3>
+			<div class="doublespace" id="xml-config"></div>
 
-			<p id="advancedfeatures">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-				Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			</p>-->
+			<h3>XML configuration</h3>
+
+			<p>XML configuration files for Neon plugin are files that contain information about extensions, parameters, services etc.</p>
+
+			<ul>
+				<li>Plugin loads all files named <code class="inline">intellij-neon-pro.xml</code> in your project including <code class="inline">vendor</code> folder or some other folders except ignored folders.</li>
+				<li>You can use more <code class="inline">intellij-neon-pro.xml</code> files. All will be loaded, but must have different value in <code class="inline">vendor</code> attribute.</li>
+				<li><b>Tip:</b> distribute <code class="inline">intellij-neon-pro.xml</code> files with your Composer package</li>
+				<li>Here is <a href="/xml/Neon.xsd" target="_blank">Neon XSD</a> definition</li>
+				<li>
+					You may need to adjust the path to the XSD <code class="inline">.idea/intellij-neon-pro/xmlSources/Neon.xsd</code> if you are not in the root directory.
+					<ul>
+						<li>Or use the external URL: <a href="https://mesour-intellij-plugins.github.io/xml/Neon.xsd" target="_blank">https://mesour-intellij-plugins.github.io/xml/Neon.xsd</a> instead.</li>
+					</ul>
+				</li>
+			</ul>
+
+			<p>This is example file content with sample values:</p>
+
+			<ul>
+				<li>Replace <code class="inline">myVendor/myPackage</code> to your unique vendor name</li>
+			</ul>
+
+			<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;neon vendor="myVendor/myPackage"
+	  version="1"
+	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:noNamespaceSchemaLocation=".idea/intellij-neon-pro/xmlSources/Neon.xsd"&gt;
+	&lt;project&gt;
+		&lt;useExtension name="tracy" type="Tracy\Bridges\Nette\TracyExtension" /&gt;
+	&lt;/project&gt;
+	&lt;extensions&gt;
+		&lt;extension type="Tracy\Bridges\Nette\TracyExtension"&gt;
+			&lt;schema&gt;
+				&lt;structure&gt;
+					&lt;field name="email"&gt;
+						&lt;email /&gt;
+						&lt;anyOf&gt;
+							&lt;listOf&gt;
+								&lt;value&gt;&lt;email /&gt;&lt;/value&gt;
+							&lt;/listOf&gt;
+						&lt;/anyOf&gt;
+					&lt;/field&gt;
+					&lt;field name="fromEmail"&gt;&lt;email /&gt;&lt;/field&gt;
+					&lt;field name="emailSnooze"&gt;&lt;string /&gt;&lt;/field&gt;
+					&lt;field name="logSeverity"&gt;
+						&lt;useReusable ref="phpSeverity"/&gt;
+					&lt;/field&gt;
+					&lt;field name="strictMode"&gt;
+						&lt;useReusable ref="phpSeverity"/&gt;
+					&lt;/field&gt;
+					&lt;field name="scream"&gt;
+						&lt;useReusable ref="phpSeverity"/&gt;
+					&lt;/field&gt;
+					&lt;field name="editor"&gt;&lt;type value="string|null" /&gt;&lt;/field&gt;
+					&lt;field name="browser"&gt;&lt;string /&gt;&lt;/field&gt;
+					&lt;field name="errorTemplate"&gt;&lt;string /&gt;&lt;/field&gt;
+					&lt;field name="dumpTheme"&gt;&lt;string /&gt;&lt;/field&gt;
+					&lt;field name="showBar"&gt;&lt;bool /&gt;&lt;/field&gt;
+					&lt;field name="showLocation"&gt;&lt;bool /&gt;&lt;/field&gt;
+					&lt;field name="maxLength"&gt;&lt;int /&gt;&lt;/field&gt;
+					&lt;field name="maxDepth"&gt;&lt;int /&gt;&lt;/field&gt;
+					&lt;field name="maxItems"&gt;&lt;int /&gt;&lt;/field&gt;
+					&lt;field name="keysToHide"&gt;
+						&lt;arrayOf&gt;
+							&lt;value&gt;&lt;type value="string|int|null" /&gt;&lt;/value&gt;
+						&lt;/arrayOf&gt;
+					&lt;/field&gt;
+					&lt;field name="bar"&gt;
+						&lt;listOf&gt;
+							&lt;value&gt;&lt;type value="string|\Nette\DI\Definitions\Statement" /&gt;&lt;/value&gt;
+						&lt;/listOf&gt;
+					&lt;/field&gt;
+					&lt;field name="blueScreen"&gt;&lt;callable /&gt;&lt;/field&gt;
+					&lt;field name="editorMapping" default="null"&gt;
+						&lt;anyOf&gt;
+							&lt;null /&gt;
+							&lt;arrayOf&gt;
+								&lt;key&gt;&lt;string /&gt;&lt;int /&gt;&lt;/key&gt;
+								&lt;value&gt;&lt;string /&gt;&lt;/value&gt;
+							&lt;/arrayOf&gt;
+						&lt;/anyOf&gt;
+					&lt;/field&gt;
+					&lt;field name="netteMailer"&gt;&lt;bool /&gt;&lt;/field&gt;
+				&lt;/structure&gt;
+			&lt;/schema&gt;
+			&lt;services&gt;
+				&lt;service name="logger" type="\Tracy\ILogger"/&gt;
+				&lt;service name="blueScreen" type="\Tracy\BlueScreen"/&gt;
+				&lt;service name="bar" type="\Tracy\Bar"/&gt;
+			&lt;/services&gt;
+		&lt;/extension&gt;
+	&lt;/extensions&gt;
+	&lt;reusables&gt;
+		&lt;reusable id="phpSeverity"&gt;
+			&lt;anyOf&gt;
+				&lt;bool /&gt;
+				&lt;int /&gt;
+				&lt;string pattern="(E_(?:ALL|PARSE|STRICT|RECOVERABLE_ERROR|(?:CORE|COMPILE)_(?:ERROR|WARNING)|(?:USER_)?(?:ERROR|WARNING|NOTICE|DEPRECATED))|[ &amp;|~()])+" /&gt;
+				&lt;listOf&gt;
+					&lt;value&gt;&lt;string pattern="E_(?:ALL|PARSE|STRICT|RECOVERABLE_ERROR|(?:CORE|COMPILE)_(?:ERROR|WARNING)|(?:USER_)?(?:ERROR|WARNING|NOTICE|DEPRECATED))" /&gt;&lt;/value&gt;
+				&lt;/listOf&gt;
+			&lt;/anyOf&gt;
+		&lt;/reusable&gt;
+	&lt;/reusables&gt;
+&lt;/neon&gt;</code></pre>
+
+			<h3>Allowed XML Elements and Attributes</h3>
+
+			<p>This documentation describes the basic structure and constraints defined in the <a href="/xml/Neon.xsd" target="_blank">Neon XSD</a> schema.</p>
+
+			<h4>&lt;neon&gt;</h4>
+			<table class="table">
+				<thead>
+				<tr>
+					<th>Attribute</th>
+					<th>Required</th>
+					<th>Default</th>
+					<th>Possible Values</th>
+					<th>Description</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td><code>vendor</code></td>
+					<td>yes</td>
+					<td>none</td>
+					<td>any string</td>
+					<td>Vendor name</td>
+				</tr>
+				<tr>
+					<td><code>version</code></td>
+					<td>yes</td>
+					<td>none</td>
+					<td>any int</td>
+					<td>Schema version</td>
+				</tr>
+				</tbody>
+			</table>
+
+			<h4>Sub-elements of &lt;neon&gt;</h4>
+
+			<table class="table">
+				<thead>
+				<tr>
+					<th>Element</th>
+					<th>Required</th>
+					<th>Description</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td><code>&lt;project&gt;</code></td>
+					<td>no</td>
+					<td>Defines project-specific configurations</td>
+				</tr>
+				<tr>
+					<td><code>&lt;extensions&gt;</code></td>
+					<td>no</td>
+					<td>Defines extensions schema and services</td>
+				</tr>
+				<tr>
+					<td><code>&lt;reusables&gt;</code></td>
+					<td>no</td>
+					<td>Reusable configurations</td>
+				</tr>
+				</tbody>
+			</table>
+
+			<h4>&lt;project&gt;</h4>
+
+			<p>The <code>&lt;project&gt;</code> element can contain the following sub-elements:</p>
+
+			<ul>
+				<li><code>&lt;useExtension&gt;</code>: Specifies an extension to use (required attributes: <code>name</code>, <code>type</code>).</li>
+				<li><code>&lt;file&gt;</code>: Specifies a file (required attributes: <code>type</code>, <code>path</code>).</li>
+				<li><code>&lt;parameters&gt;</code>: Defines project parameters.</li>
+			</ul>
+
+			<h4>&lt;extensions&gt;</h4>
+
+			<p>The <code>&lt;extensions&gt;</code> element defines available extensions. It contains one or more <code>extension</code> sub-elements with the following attributes:</p>
+
+			<table class="table">
+				<thead>
+				<tr>
+					<th>Attribute</th>
+					<th>Required</th>
+					<th>Default</th>
+					<th>Description</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td><code>type</code></td>
+					<td>yes</td>
+					<td>none</td>
+					<td>Type of the extension</td>
+				</tr>
+				</tbody>
+			</table>
+
+			<p>The <code>&lt;extension&gt;</code> element can contain the following sub-elements:</p>
+
+			<ul>
+				<li><code>&lt;schema&gt;</code>: Defines the structure of the extension configuration, allowing for nested fields and reusable types.</li>
+				<li><code>&lt;services&gt;</code>: Specifies a list of services associated with the extension, including their names and types.</li>
+			</ul>
+
+			<p>An example is provided above.</p>
+
+			<h4>&lt;reusables&gt;</h4>
+			<p>The <code>&lt;reusables&gt;</code> element defines reusable configurations for schemas. It contains one or more <code>&lt;reusable&gt;</code> sub-elements, each uniquely identified by the <code>id</code> attribute.</p>
+
+			<table class="table">
+				<thead>
+				<tr>
+					<th>Element</th>
+					<th>Attribute</th>
+					<th>Required</th>
+					<th>Description</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td><code>&lt;reusables&gt;</code></td>
+					<td>None</td>
+					<td>No</td>
+					<td>Container for reusable schema definitions.</td>
+				</tr>
+				<tr>
+					<td><code>&lt;reusable&gt;</code></td>
+					<td><code>id</code></td>
+					<td>Yes</td>
+					<td>Unique identifier for the reusable schema definition.</td>
+				</tr>
+				</tbody>
+			</table>
+
+			<h5>Example:</h5>
+			<pre><code>&lt;reusables&gt;
+    &lt;reusable id="exampleSchema1"&gt;
+        &lt;anyOf&gt;
+            &lt;string minLength="1" maxLength="255" /&gt;
+            &lt;int min="0" max="100" /&gt;
+        &lt;/anyOf&gt;
+    &lt;/reusable&gt;
+    &lt;reusable id="exampleSchema2"&gt;
+        &lt;listOf&gt;
+            &lt;value&gt;
+                &lt;type value="string" /&gt;
+            &lt;/value&gt;
+        &lt;/listOf&gt;
+    &lt;/reusable&gt;
+&lt;/reusables&gt;</code></pre>
 
 			<div class="divider" style="width:24%; margin:30px 0;"></div>
 
@@ -194,12 +446,6 @@
 			<ul>
 				<li>Here problem with refactoring services and parameters that have <b>more than one definition</b> (only usages will be refactored)</li>
 				<li>For services and parameters with only one definition everything works fine</li>
-			</ul>
-
-			<h4>Move class</h4>
-
-			<ul>
-				<li>For now is not implemented <b>Move class</b> functionality. If you use it in PHP, then it will not affect Neon files.</li>
 			</ul>
 
 			<h4>Do not use mixed indents</h4>
@@ -226,7 +472,10 @@
 
 			<div class="divider" style="width:24%; margin:30px 0;"></div>
 
-			<p>© 2022 Matouš Němec</p>
+			<p>© <span id="year">2022</span> Matouš Němec</p>
+			<script>
+				document.getElementById('year').textContent = new Date().getFullYear();
+			</script>
 
 			<div class="doublespace"></div>
 
