@@ -1,5 +1,4 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
     <xs:element name="neon">
         <xs:complexType>
             <xs:sequence>
@@ -140,7 +139,7 @@
     <xs:element name="arrayOf">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="key" type="intOrStringType" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="key" type="intOrStringType" minOccurs="0" maxOccurs="1"/>
                 <xs:element name="value" type="anyOfType" minOccurs="1" maxOccurs="1"/>
             </xs:sequence>
             <xs:attributeGroup ref="items"/>
